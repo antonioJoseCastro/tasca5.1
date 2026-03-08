@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <title>Oficines</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Oficines</h1>
+        <div id="oficinas"></div>
+        <script>
+        function officeCallback(data){
+            let contenedor = document.getElementById("oficinas");
+            data.forEach(oficina => {
+                let bloque = document.createElement("div");
+                bloque.className = "office";
+                bloque.innerHTML = `
+                    <h2>${oficina.city}</h2>
+                    <div class="contenido">
+                        <img src="${oficina.picture}" class="foto">
+                        <div class="info">
+                            <p><strong>Teléfono:</strong> ${oficina.phone}</p>
+                            <p><strong>Dirección:</strong> ${oficina.addressLine1} ${oficina.addressLine2 ?? ""}</p>
+                            <p><strong>Estado:</strong> ${oficina.state ?? "-"}</p>
+                            <p><strong>País:</strong> ${oficina.country} - ${oficina.territory}</p>
+                        </div>
+                    </div>
+                `;
+                contenedor.appendChild(bloque);
+            });
+
+        }
+        </script>
+        <script src="offices.jsonp"></script>
+    </body>
+</html>
