@@ -1,0 +1,1 @@
+mysql -u root -p --xml -e "SELECT * FROM classicmodels.payments JOIN classicmodels.customers USING (customerNumber);" classicmodels > payments.xml
