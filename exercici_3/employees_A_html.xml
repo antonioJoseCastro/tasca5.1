@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+  <xsl:strip-space elements="*"/>
+
+  <!-- Plantilla principal -->
+  <xsl:template match="/resultset">
+    <html>
+      <head>
+        <title>Llista d'empleats</title>
+      </head>
+      <body>
+        <h2>Llista d'empleats</h2>
+        <ul>
+          <!-- Ordenar empleados por firstName -->
+          <xsl:for-each select="row">
+            <xsl:sort select="firstName" data-type="text" order="ascending"/>
+            <li>
+              <h3 style="color:blue; font-size:20px;">
+                Empleat amb id <xsl:value-of select="employeeNumber"/>
+              </h3>
+              <ul>
+                <li>
+                  <span style="font-weight:bold; font-size:18px;">Nom:</span>
+                  <xsl:value-of select="firstName"/> <xsl:value-of select="lastName"/>
+                </li>
+                <li>
+                  <span style="font-weight:bold;">Correu:</span>
+                  <xsl:value-of select="email"/>
+                </li>
+                <li>
+                  <span style="font-weight:bold;">Id del seu superior:</span>
+                  <xsl:value-of select="reportsTo"/>
+                </li>
+                <li>
+                  <span style="font-weight:bold;">Posició:</span>
+                  <xsl:value-of select="jobTitle"/>
+                </li>
+                <li>
+                  <span style="font-weight:bold;">Extensió:</span>
+                  <xsl:value-of select="extension"/>
+                </li>
+                <!-- Oficina -->
+                <li>
+                  <span style="font-weight:bold;">Oficina:</span>
+                  <ul>
+                    <li style="font-style:italic; color:red;">
+                      <span style="font-weight:bold;">Codi:</span> <xsl:value-of select="ofCode"/>
+                    </li>
+                    <li style="font-style:italic; color:red;">
+                      <span style="font-weight:bold;">Ciutat:</span> <xsl:value-of select="ofCity"/>
+                    </li>
+                    <li style="font-style:italic; color:red;">
+                      <span style="font-weight:bold;">Telèfon:</span> <xsl:value-of select="ofPhone"/>
+                    </li>
+                    <li style="font-style:italic; color:red;">
+                      <span style="font-weight:bold;">Adreça:</span> 
+                      <xsl:value-of select="ofAdd1"/>
+                      <xsl:if test="string-length(ofAdd2) > 0">, <xsl:value-of select="ofAdd2"/></xsl:if>
+                    </li>
+                    <li style="font-style:italic; color:red;">
+                      <span style="font-weight:bold;">Estat:</span> <xsl:value-of select="ofState"/>
+                    </li>
+                    <li style="font-style:italic; color:red;">
+                      <span style="font-weight:bold;">País:</span> <xsl:value-of select="ofCountry"/>
+                    </li>
+                    <li style="font-style:italic; color:red;">
+                      <span style="font-weight:bold;">Codi postal:</span> <xsl:value-of select="ofPostalCode"/>
+                    </li>
+                    <li style="font-style:italic; color:red;">
+                      <span style="font-weight:bold;">Territori:</span> <xsl:value-of select="ofTerritory"/>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </xsl:for-each>
+        </ul>
+      </body>
+    </html>
+  </xsl:template>
+
+</xsl:stylesheet>
